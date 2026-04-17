@@ -8,6 +8,18 @@ interface RequestOptions {
   headers?: Record<string, string>;
 }
 
+export class HttpError extends Error {
+  constructor(
+    public readonly status: number,
+    message: string,
+    public readonly body?: unknown,
+    public readonly retryAfterSeconds?: number
+  ) {
+    super(message);
+    this.name = "HttpError";
+  }
+}
+
 async function request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { method = "GET", body, headers = {} } = options;
 
@@ -26,7 +38,29 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
   const response = await fetch(`${BASE_URL}${endpoint}`, config);
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    let responseBody: unknown;
+    try {
+      responseBody = await response.json();
+    } catch {
+      responseBody = undefined;
+    }
+    const message =
+      responseBody &&
+      typeof responseBody === "object" &&
+      "message" in responseBody
+        ? String((responseBody as Record<string, unknown>).message)
+        : `HTTP ${response.status}: ${response.statusText}`;
+
+    const retryAfterHeader = response.headers.get("Retry-After");
+    let retryAfterSeconds: number | undefined;
+    if (retryAfterHeader) {
+      const parsed = Number.parseInt(retryAfterHeader, 10);
+      if (!Number.isNaN(parsed) && parsed >= 0) {
+        retryAfterSeconds = parsed;
+      }
+    }
+
+    throw new HttpError(response.status, message, responseBody, retryAfterSeconds);
   }
 
   return response.json() as Promise<T>;

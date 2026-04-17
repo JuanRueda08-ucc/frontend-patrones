@@ -8,6 +8,8 @@ interface PromptFormProps {
   onUserIdChange: (value: string) => void;
   onSubmit: (prompt: string) => void;
   isLoading: boolean;
+  /** When true, sending is blocked (e.g. rate limit or quota exceeded). */
+  sendBlocked?: boolean;
 }
 
 export default function PromptForm({
@@ -15,11 +17,13 @@ export default function PromptForm({
   onUserIdChange,
   onSubmit,
   isLoading,
+  sendBlocked = false,
 }: PromptFormProps) {
   const [prompt, setPrompt] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const canSubmit = prompt.trim().length > 0 && userId.trim().length > 0 && !isLoading;
+  const canSubmit =
+    prompt.trim().length > 0 && userId.trim().length > 0 && !isLoading && !sendBlocked;
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -51,7 +55,7 @@ export default function PromptForm({
           className={styles.userInput}
           value={userId}
           onChange={(e) => onUserIdChange(e.target.value)}
-          disabled={isLoading}
+          disabled={isLoading || sendBlocked}
           autoComplete="off"
           spellCheck={false}
         />
@@ -66,7 +70,7 @@ export default function PromptForm({
           onKeyDown={handleKeyDown}
           placeholder="Enter a prompt..."
           rows={2}
-          disabled={isLoading}
+          disabled={isLoading || sendBlocked}
           autoFocus
           spellCheck={false}
         />
