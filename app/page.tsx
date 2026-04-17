@@ -1,88 +1,68 @@
-"use client";
+import ChatContainer from "@/components/chat/ChatContainer";
 
 export default function HomePage() {
   return (
-    <main style={styles.main}>
-      <div style={styles.container}>
-        <div style={styles.badge}>v1.0 — BETA</div>
-
-        <h1 style={styles.title}>
-          AI Proxy<br />
-          <span style={styles.titleAccent}>Platform</span>
-        </h1>
-
-        <p style={styles.subtitle}>
-          Simulated AI consumption infrastructure
-        </p>
-
-        <div style={styles.divider} />
-
-        <div style={styles.statusRow}>
-          <span style={styles.statusDot} />
-          <span style={styles.statusText}>System operational</span>
+    <div style={layout.page}>
+      <header style={layout.header}>
+        <div style={layout.headerLeft}>
+          <span style={layout.logo}>AI Proxy Platform</span>
+          <span style={layout.badge}>BETA</span>
         </div>
-      </div>
-    </main>
+        <div style={layout.statusRow}>
+          <span style={layout.statusDot} />
+          <span style={layout.statusText}>System operational</span>
+        </div>
+      </header>
+
+      <ChatContainer />
+    </div>
   );
 }
 
-const styles: Record<string, React.CSSProperties> = {
-  main: {
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "var(--bg-primary)",
-    padding: "2rem",
-  },
-  container: {
+const layout: Record<string, React.CSSProperties> = {
+  page: {
+    height: "100vh",
     display: "flex",
     flexDirection: "column",
-    gap: "1.5rem",
-    maxWidth: "480px",
-    width: "100%",
+    overflow: "hidden",
+  },
+  header: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "0 1.5rem",
+    height: "56px",
+    borderBottom: "1px solid var(--border)",
+    background: "var(--bg-secondary)",
+    flexShrink: 0,
+  },
+  headerLeft: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.75rem",
+  },
+  logo: {
+    fontFamily: "var(--font-mono)",
+    fontSize: "0.9rem",
+    fontWeight: 600,
+    color: "var(--text-primary)",
+    letterSpacing: "0.02em",
   },
   badge: {
     fontFamily: "var(--font-mono)",
-    fontSize: "0.7rem",
-    fontWeight: 500,
+    fontSize: "0.62rem",
+    fontWeight: 600,
     letterSpacing: "0.12em",
     color: "var(--accent-green)",
     background: "var(--accent-green-dim)",
     border: "1px solid var(--accent-green)",
     borderRadius: "var(--radius-sm)",
-    padding: "0.25rem 0.6rem",
-    width: "fit-content",
-    textTransform: "uppercase",
-  },
-  title: {
-    fontFamily: "var(--font-mono)",
-    fontSize: "clamp(2.5rem, 6vw, 4rem)",
-    fontWeight: 300,
-    lineHeight: 1.1,
-    color: "var(--text-primary)",
-    letterSpacing: "-0.02em",
-  },
-  titleAccent: {
-    color: "var(--accent-green)",
-    fontWeight: 600,
-  },
-  subtitle: {
-    fontFamily: "var(--font-sans)",
-    fontSize: "0.95rem",
-    fontWeight: 300,
-    color: "var(--text-secondary)",
-    letterSpacing: "0.01em",
-  },
-  divider: {
-    height: "1px",
-    background: "var(--border)",
-    width: "100%",
+    padding: "0.15rem 0.45rem",
   },
   statusRow: {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
+    gap: "0.4rem",
   },
   statusDot: {
     width: "6px",
@@ -94,8 +74,8 @@ const styles: Record<string, React.CSSProperties> = {
   },
   statusText: {
     fontFamily: "var(--font-mono)",
-    fontSize: "0.75rem",
-    color: "var(--text-secondary)",
+    fontSize: "0.68rem",
+    color: "var(--text-muted)",
     letterSpacing: "0.05em",
   },
 };

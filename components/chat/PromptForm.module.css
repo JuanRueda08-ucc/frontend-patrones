@@ -1,0 +1,120 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+/* ── User ID row ── */
+.userRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.userLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.userInput {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-accent);
+  padding: 0.2rem 0.4rem;
+  outline: none;
+  width: 180px;
+  transition: border-color 0.15s ease;
+}
+
+.userInput:focus {
+  border-bottom-color: var(--accent-green);
+  color: var(--text-primary);
+}
+
+/* ── Prompt row ── */
+.promptRow {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.textarea {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  resize: none;
+  outline: none;
+  line-height: 1.6;
+  min-height: 52px;
+  max-height: 160px;
+  transition: border-color 0.15s ease;
+}
+
+.textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.textarea:focus {
+  border-color: var(--border-accent);
+}
+
+.textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Send button ── */
+.button {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg-primary);
+  background: var(--accent-green);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.25rem;
+  height: 52px;
+  min-width: 80px;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Hint ── */
+.hint {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: right;
+  letter-spacing: 0.04em;
+}

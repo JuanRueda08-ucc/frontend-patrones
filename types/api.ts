@@ -9,3 +9,19 @@ export interface ApiError {
   status: number;
   details?: unknown;
 }
+
+export interface GenerationRequest {
+  userId: string;
+  prompt: string;
+}
+
+export interface GenerationResponse {
+  userId: string;
+  prompt: string;
+  generatedText: string;
+  tokensConsumed: number;
+  plan: string;
+  remainingRequestsInWindow: number;
+  remainingMonthlyTokens: number;
+  timestamp: string;
+}

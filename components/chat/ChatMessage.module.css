@@ -1,0 +1,90 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.message:last-child {
+  border-bottom: none;
+}
+
+/* ── Header row (role label + timestamp) ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.roleLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.roleLabelUser {
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-accent);
+}
+
+.roleLabelAssistant {
+  color: var(--accent-green);
+  background: var(--accent-green-dim);
+  border: 1px solid var(--accent-green);
+}
+
+.timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* ── Content ── */
+.content {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.contentUser {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ── Metadata strip (assistant only) ── */
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.metaKey {
+  color: var(--text-muted);
+}
+
+.metaValue {
+  color: var(--accent-green);
+  font-weight: 500;
+}
